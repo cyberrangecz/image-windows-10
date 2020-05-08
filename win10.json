@@ -1,0 +1,151 @@
+{
+	"builders": [
+        {
+            "boot_wait": "{{user `boot_wait`}}",
+            "disk_size": "{{ user `disk_size` }}",
+            "format": "raw",
+            "disk_interface": "virtio",
+            "headless": "{{user `headless`}}",
+            "http_directory": "{{user `http_directory`}}",
+            "http_port_max": "{{user `http_port_max`}}",
+            "http_port_min": "{{user `http_port_min`}}",
+            "iso_checksum": "{{user `iso_checksum`}}",
+            "iso_checksum_type": "{{user `iso_checksum_type`}}",
+            "iso_url": "{{user `iso_url`}}",
+            "vnc_port_min": 5900,
+            "vnc_port_max": 5980,
+            "name": "win10-qemu",
+            "net_device": "virtio-net",
+            "output_directory": "target-qemu",
+            "floppy_files": [
+              "{{user `autounattend`}}",
+              "./scripts/fixnetwork.ps1",
+              "./scripts/microsoft-updates.bat",
+              "./scripts/win-updates.ps1",
+              "./scripts/openssh.ps1",
+              "./scripts/configureRemotingForAnsible.ps1"
+            ],
+
+            "qemuargs": [
+                [
+                    "-m",
+                    "{{ user `memory_size` }}m"
+                ],
+
+                [
+                    "-smp",
+                    "cpus={{ user `cpus` }},maxcpus=16,cores=4"
+                ],
+
+                [   "-display",
+                    "sdl"
+                ],
+
+                [   "-drive", "file={{ user `virtio_win_iso` }},media=cdrom,index=3"
+                ],
+
+                [   "-drive", "file=target-qemu/{{ .Name }},if=virtio,cache=writeback,discard=ignore,format=raw,index=1"
+                ]
+            ],
+            "shutdown_command": "{{user `shutdown_command`}}",
+            "ssh_password": "{{user `ssh_password`}}",
+            "ssh_port": "{{user `ssh_port`}}",
+            "ssh_username": "{{user `ssh_username`}}",
+            "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+            "type": "qemu",
+            "vm_name": "{{user `vm_name`}}",
+            "vnc_bind_address": "{{user `vnc_bind_address`}}"
+        },
+        {
+            "boot_command": [
+
+            ],
+            "boot_wait": "{{user `boot_wait`}}",
+            "disk_size": "{{ user `disk_size` }}",
+            "guest_os_type": "Windows10_64",
+            "headless": "{{user `headless`}}",
+            "http_directory": "{{user `http_directory`}}",
+            "http_port_max": "{{user `http_port_max`}}",
+            "http_port_min": "{{user `http_port_min`}}",
+            "iso_checksum": "{{user `iso_checksum`}}",
+            "iso_checksum_type": "{{user `iso_checksum_type`}}",
+            "iso_url": "{{user `iso_url`}}",
+            "name": "win10-vbox",
+            "floppy_files": [
+              "{{user `autounattend`}}",
+              "./scripts/fixnetwork.ps1",
+              "./scripts/microsoft-updates.bat",
+              "./scripts/win-updates.ps1",
+              "./scripts/openssh.ps1",
+              "./scripts/configureRemotingForAnsible.ps1"
+            ],
+            "vboxmanage": [
+                [
+                    "modifyvm",
+                    "{{.Name}}",
+                    "--memory",
+                    "{{ user `memory_size` }}"
+                ],
+                [
+                    "modifyvm",
+                    "{{.Name}}",
+                    "--cpus",
+                    "{{ user `cpus` }}"
+                ]
+            ],
+            "shutdown_command": "echo 'vagrant' | {{user `shutdown_command`}}",
+            "ssh_password": "{{user `ssh_password`}}",
+            "ssh_port": "{{user `ssh_port`}}",
+            "ssh_username": "{{user `ssh_username`}}",
+            "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+            "type": "virtualbox-iso",
+            "vm_name": "{{user `vm_name`}}"
+          }
+    ],
+	"provisioners": [
+      {
+        "type": "shell",
+        "remote_path": "/tmp/script.bat",
+        "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
+        "scripts": [
+          "./scripts/vm-guest-tools.bat",
+          "./scripts/vagrant-ssh.bat",
+          "./scripts/disable-auto-logon.bat",
+          "./scripts/enable-rdp.bat",
+          "./scripts/compile-dotnet-assemblies.bat",
+          "./scripts/compact.bat"
+        ]
+      }
+    ],
+	"post-processors": [
+       {
+            "type": "vagrant",
+            "output" : "target-vbox/win10.box",
+            "vagrantfile_template": "Vagrantfile-template",
+            "except": ["win10-qemu"]
+       }
+	],
+	"variables": {
+          "boot_wait": "10s",
+          "cpus": "4",
+          "disk_size": "16384",
+          "headless": "false",
+          "autounattend": "Autounattend.xml",
+          "http_directory": "http",
+          "http_port_max": "10089",
+          "http_port_min": "10082",
+          "iso_url": "http://download.microsoft.com/download/C/3/9/C399EEA8-135D-4207-92C9-6AAB3259F6EF/10240.16384.150709-1700.TH1_CLIENTENTERPRISEEVAL_OEMRET_X64FRE_EN-US.ISO",
+          "iso_checksum_type": "sha1",
+          "iso_checksum": "56ab095075be28a90bc0b510835280975c6bb2ce",
+          "memory_size": "4096",
+          "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+          "ssh_password": "vagrant",
+          "ssh_port": "22",
+          "ssh_username": "vagrant",
+          "ssh_wait_timeout": "90m",
+          "vm_name": "win10",
+          "vnc_bind_address": "0.0.0.0",
+          "virtio_win_iso": "virtio-win.iso"
+
+	}
+}

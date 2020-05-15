@@ -8,7 +8,7 @@ if not exist "C:\Windows\Temp\ultradefrag.zip" (
 )
 
 if not exist "C:\Windows\Temp\ultradefrag-portable-6.1.0.amd64\udefrag.exe" (
-	START /wait ""C:\Program Files\7-Zip\7z.exe" x C:\Windows\Temp\ultradefrag.zip -oC:\Windows\Temp"
+	cmd /c ""C:\Program Files\7-Zip\7z.exe" x C:\Windows\Temp\ultradefrag.zip -oC:\Windows\Temp"
 )
 
 if not exist "C:\Windows\Temp\SDelete.zip" (

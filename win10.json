@@ -22,8 +22,7 @@
               "./scripts/fixnetwork.ps1",
               "./scripts/microsoft-updates.bat",
               "./scripts/win-updates.ps1",
-              "./scripts/openssh.ps1",
-              "./scripts/configureRemotingForAnsible.ps1"
+              "./scripts/openssh.ps1"
             ],
 
             "qemuargs": [
@@ -76,8 +75,7 @@
               "./scripts/fixnetwork.ps1",
               "./scripts/microsoft-updates.bat",
               "./scripts/win-updates.ps1",
-              "./scripts/openssh.ps1",
-              "./scripts/configureRemotingForAnsible.ps1"
+              "./scripts/openssh.ps1"
             ],
             "vboxmanage": [
                 [
@@ -103,19 +101,30 @@
           }
     ],
 	"provisioners": [
-      {
-        "type": "shell",
-        "remote_path": "/tmp/script.bat",
-        "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
-        "scripts": [
-          "./scripts/vm-guest-tools.bat",
-          "./scripts/vagrant-ssh.bat",
-          "./scripts/disable-auto-logon.bat",
-          "./scripts/enable-rdp.bat",
-          "./scripts/compile-dotnet-assemblies.bat",
-          "./scripts/compact.bat"
-        ]
-      }
+          {
+            "type": "file",
+            "source": "./scripts/spice-guest-tools-latest.exe",
+            "destination": "C:/Windows/Temp/"
+          },
+          {
+            "type": "powershell",
+            "scripts": [
+              "./scripts/configureRemotingForAnsible.ps1",
+              "./scripts/spiceToolsInstall.ps1"
+                ]
+           },{
+             "type": "shell",
+             "remote_path": "/tmp/script.bat",
+             "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
+             "scripts": [
+               "./scripts/vm-guest-tools.bat",
+               "./scripts/vagrant-ssh.bat",
+               "./scripts/disable-auto-logon.bat",
+               "./scripts/enable-rdp.bat",
+               "./scripts/compile-dotnet-assemblies.bat",
+               "./scripts/compact.bat"
+              ]
+            }
     ],
 	"post-processors": [
        {

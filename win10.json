@@ -22,7 +22,7 @@
               "./scripts/fixnetwork.ps1",
               "./scripts/microsoft-updates.bat",
               "./scripts/win-updates.ps1",
-              "./scripts/openssh.ps1"
+              "./scripts/openssh2.ps1"
             ],
 
             "qemuargs": [
@@ -47,9 +47,9 @@
                 ]
             ],
             "shutdown_command": "{{user `shutdown_command`}}",
-            "ssh_password": "{{user `ssh_password`}}",
-            "ssh_port": "{{user `ssh_port`}}",
             "ssh_username": "{{user `ssh_username`}}",
+            "ssh_port": "{{user `ssh_port`}}",
+            "ssh_private_key_file": "{{user `private_key_file`}}",
             "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
             "type": "qemu",
             "vm_name": "{{user `vm_name`}}",
@@ -75,7 +75,7 @@
               "./scripts/fixnetwork.ps1",
               "./scripts/microsoft-updates.bat",
               "./scripts/win-updates.ps1",
-              "./scripts/openssh.ps1"
+              "./scripts/openssh2.ps1"
             ],
             "vboxmanage": [
                 [
@@ -92,9 +92,9 @@
                 ]
             ],
             "shutdown_command": "echo 'vagrant' | {{user `shutdown_command`}}",
-            "ssh_password": "{{user `ssh_password`}}",
-            "ssh_port": "{{user `ssh_port`}}",
             "ssh_username": "{{user `ssh_username`}}",
+            "ssh_port": "{{user `ssh_port`}}",
+            "ssh_private_key_file": "{{user `private_key_file`}}",
             "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
             "type": "virtualbox-iso",
             "vm_name": "{{user `vm_name`}}"
@@ -102,29 +102,33 @@
     ],
 	"provisioners": [
           {
+            "type": "powershell",
+            "script": "./scripts/configureRemotingForAnsible.ps1"
+          },
+          {
             "type": "file",
             "source": "./scripts/spice-guest-tools-latest.exe",
-            "destination": "C:/Windows/Temp/"
+            "destination": "C:/Windows/Temp/",
+            "only": ["win10-qemu"]
           },
           {
             "type": "powershell",
-            "scripts": [
-              "./scripts/configureRemotingForAnsible.ps1",
-              "./scripts/spiceToolsInstall.ps1"
-                ]
-           },{
-             "type": "shell",
-             "remote_path": "/tmp/script.bat",
-             "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
-             "scripts": [
-               "./scripts/vm-guest-tools.bat",
-               "./scripts/vagrant-ssh.bat",
-               "./scripts/disable-auto-logon.bat",
-               "./scripts/enable-rdp.bat",
-               "./scripts/compile-dotnet-assemblies.bat",
-               "./scripts/compact.bat"
-              ]
-            }
+            "script": "./scripts/spiceToolsInstall.ps1",
+            "only": ["win10-qemu"]
+          },
+          {
+            "type": "windows-shell",
+            "script": "./scripts/disable-auto-logon.bat"
+          },
+          {
+            "type": "windows-shell",
+            "script": "./scripts/vm-guest-tools.bat",
+            "only": ["win10-vbox"]
+          },
+          {
+            "type": "powershell",
+            "script": "./scripts/fix.ps1"
+          }
     ],
 	"post-processors": [
        {
@@ -148,9 +152,9 @@
           "iso_checksum": "489ebee676e26cdb81377b0e6385c001a22589b8",
           "memory_size": "4096",
           "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-          "ssh_password": "vagrant",
-          "ssh_port": "22",
           "ssh_username": "vagrant",
+          "ssh_port": "22",
+          "private_key_file": "ssh-key",
           "ssh_wait_timeout": "210m",
           "vm_name": "win10",
           "vnc_bind_address": "0.0.0.0",

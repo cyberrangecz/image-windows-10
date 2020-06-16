@@ -8,6 +8,8 @@ General requirement and instructions how to create and import created images to 
 
 The scripts will install all Windows updates – by default – during Windows Setup. To disable this functionality, comment out the `WITH WINDOWS UPDATES` section and uncomment the `WITHOUT WINDOWS UPDATES` section in `Autounattend.xml`.
 
+SSH and WinRM is enabled, SSH login using password is disabled. ssh-key.pub is inserted for the vagrant user.
+
 ## Image for QEMU/OpenStack
 
 For building this image for QEMU, additional [iso image with Windows drivers for QEMU](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso) must be downloaded. Use this command to download it: `wget -nv -nc https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso -O virtio-win.iso`.

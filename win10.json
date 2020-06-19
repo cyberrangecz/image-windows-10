@@ -127,7 +127,10 @@
           },
           {
             "type": "powershell",
-            "script": "./scripts/fix.ps1"
+            "scripts": [
+                        "./scripts/fix.ps1",
+                        "./scripts/Install-CloudBaseInit.ps1"
+                       ]
           }
     ],
 	"post-processors": [

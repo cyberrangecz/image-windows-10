@@ -4,7 +4,7 @@
 
 This repo contains Packer files for building Windows 10 base image for QEMU/OpenStack and for VirtualBox/Vagrant.
 
-General requirement and instructions how to create and import created images to OpenStack/Vagrant are available in [wiki](https://gitlab.ics.muni.cz/CSIRT-MU/DEVOPS/devops-group/-/wikis/image-packer).
+General requirement and instructions how to create and import created images to OpenStack/Vagrant are available in [wiki](https://gitlab.ics.muni.cz/muni-kypo-images/muni-kypo-images-wiki/-/wikis/image-packer).
 
 The scripts will install all Windows updates – by default – during Windows Setup. To disable this functionality, comment out the `WITH WINDOWS UPDATES` section and uncomment the `WITHOUT WINDOWS UPDATES` section in `Autounattend.xml`.
 
@@ -26,4 +26,4 @@ There is one admin user account:
 
 ## Known issues and requested features
 
-* See [issues](https://gitlab.ics.muni.cz/CSIRT-MU/DEVOPS/win-10-amd64/-/issues).
+* See [issues](https://gitlab.ics.muni.cz/muni-kypo-images/windows-10-amd64/-/issues).

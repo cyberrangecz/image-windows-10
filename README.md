@@ -8,7 +8,7 @@ General requirement and instructions how to create and import created images to 
 
 The scripts will install all Windows updates – by default – during Windows Setup. To disable this functionality, comment out the `WITH WINDOWS UPDATES` section and uncomment the `WITHOUT WINDOWS UPDATES` section in `Autounattend.xml`.
 
-SSH and WinRM is enabled, SSH login using password is disabled. ssh-key.pub is inserted for the vagrant user.
+SSH and WinRM is enabled, SSH login using password is disabled. ssh-key.pub is inserted for the windows user.
 
 ## Image for QEMU/OpenStack
 
@@ -16,13 +16,15 @@ For building this image for QEMU, additional [iso image with Windows drivers for
 
 There is one admin user account:
 
-*  `vagrant` with password `vagrant`
+*  `windows` with password `vagrant`, but password is set to random upon startup by [cloudbase-init](https://cloudbase-init.readthedocs.io/en/latest/intro.html) when no password is provided via metadata
 
 ## Image for VirtualBox/Vagrant
 
 There is one admin user account:
 
-*  `vagrant` with password `vagrant`
+*  `windows` with password `vagrant`
+
+If Ansible fails to connect, add `"ansible_winrm_scheme" => "http"` to `ansible.extra_vars` in Vagrantfile.
 
 ## Known issues and requested features
 

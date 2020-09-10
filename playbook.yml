@@ -1,0 +1,14 @@
+- name: Hello world
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Wait for connection
+      wait_for_connection:
+        timeout: 600
+
+    - name: Gather facts
+      setup:
+  
+    - name: Print hello world
+      debug:
+        msg: "Hello World"

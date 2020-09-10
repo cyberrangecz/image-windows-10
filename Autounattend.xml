@@ -31,8 +31,8 @@
 
             <UserData>
                 <AcceptEula>true</AcceptEula>
-                <FullName>Vagrant Administrator</FullName>
-                <Organization>Vagrant Inc.</Organization>
+                <FullName>Windows</FullName>
+                <Organization>Organization</Organization>
                 <!--
                     NOTE: If you are re-configuring this for use of a retail key
                     and using a retail ISO, you need to adjust the <ProductKey> block
@@ -161,20 +161,16 @@
         </component>
         <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
             <UserAccounts>
-                <AdministratorPassword>
-                    <Value>vagrant</Value>
-                    <PlainText>true</PlainText>
-                </AdministratorPassword>
                 <LocalAccounts>
                     <LocalAccount wcm:action="add">
                         <Password>
                             <Value>vagrant</Value>
                             <PlainText>true</PlainText>
                         </Password>
-                        <Description>Vagrant User</Description>
-                        <DisplayName>vagrant</DisplayName>
+                        <Description>Windows User</Description>
+                        <DisplayName>windows</DisplayName>
                         <Group>administrators</Group>
-                        <Name>vagrant</Name>
+                        <Name>windows</Name>
                     </LocalAccount>
                 </LocalAccounts>
             </UserAccounts>
@@ -189,7 +185,7 @@
                     <Value>vagrant</Value>
                     <PlainText>true</PlainText>
                 </Password>
-                <Username>vagrant</Username>
+                <Username>windows</Username>
                 <Enabled>true</Enabled>
             </AutoLogon>
             <FirstLogonCommands>
@@ -326,9 +322,9 @@
                     <Description>Disable Hibernation Mode</Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c wmic useraccount where "name='vagrant'" set PasswordExpires=FALSE</CommandLine>
+                    <CommandLine>cmd.exe /c wmic useraccount where "name='windows'" set PasswordExpires=FALSE</CommandLine>
                     <Order>24</Order>
-                    <Description>Disable password expiration for vagrant user</Description>
+                    <Description>Disable password expiration for windows user</Description>
                 </SynchronousCommand>
                 <!-- WITHOUT WINDOWS UPDATES -->
                 <!--
@@ -366,7 +362,7 @@
                 <HelpCustomized>false</HelpCustomized>
             </OEMInformation>
             <!-- Rename computer here. -->
-            <ComputerName>vagrant-10</ComputerName>
+            <ComputerName>windows-10</ComputerName>
             <TimeZone>Central European Standard Time</TimeZone>
             <RegisteredOwner/>
         </component>

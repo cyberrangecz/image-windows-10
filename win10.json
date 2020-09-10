@@ -22,7 +22,7 @@
               "./scripts/fixnetwork.ps1",
               "./scripts/microsoft-updates.bat",
               "./scripts/win-updates.ps1",
-              "./scripts/openssh2.ps1"
+              "./scripts/openssh.ps1"
             ],
 
             "qemuargs": [
@@ -75,7 +75,7 @@
               "./scripts/fixnetwork.ps1",
               "./scripts/microsoft-updates.bat",
               "./scripts/win-updates.ps1",
-              "./scripts/openssh2.ps1"
+              "./scripts/openssh.ps1"
             ],
             "vboxmanage": [
                 [
@@ -113,7 +113,10 @@
           },
           {
             "type": "powershell",
-            "script": "./scripts/spiceToolsInstall.ps1",
+            "scripts": [
+                        "./scripts/spiceToolsInstall.ps1",
+                        "./scripts/Install-CloudBaseInit.ps1"
+                       ],
             "only": ["win10-qemu"]
           },
           {
@@ -128,8 +131,7 @@
           {
             "type": "powershell",
             "scripts": [
-                        "./scripts/fix.ps1",
-                        "./scripts/Install-CloudBaseInit.ps1"
+                        "./scripts/fix.ps1"
                        ]
           }
     ],
@@ -155,7 +157,7 @@
           "iso_checksum": "489ebee676e26cdb81377b0e6385c001a22589b8",
           "memory_size": "4096",
           "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-          "ssh_username": "vagrant",
+          "ssh_username": "windows",
           "ssh_port": "22",
           "private_key_file": "ssh-key",
           "ssh_wait_timeout": "210m",

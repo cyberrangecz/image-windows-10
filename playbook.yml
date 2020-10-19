@@ -4,7 +4,7 @@
   tasks:
     - name: Wait for connection
       wait_for_connection:
-        timeout: 600
+        timeout: 1800
 
     - name: Gather facts
       setup:

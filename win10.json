@@ -36,10 +36,7 @@
                     "cpus={{ user `cpus` }},maxcpus=16,cores=4"
                 ],
 
-                [   "-drive", "file={{ user `virtio_win_iso` }},media=cdrom,index=3"
-                ],
-
-                [   "-drive", "file=target-qemu/{{ .Name }},if=virtio,cache=writeback,discard=ignore,format=raw,index=1"
+                [   "-cdrom", "{{ user `virtio_win_iso` }}"
                 ]
             ],
             "shutdown_command": "{{user `shutdown_command`}}",

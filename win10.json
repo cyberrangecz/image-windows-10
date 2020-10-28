@@ -12,8 +12,8 @@
             "http_port_min": "{{user `http_port_min`}}",
             "iso_checksum": "{{user `iso_checksum`}}",
             "iso_url": "{{user `iso_url`}}",
-            "vnc_port_min": 5900,
-            "vnc_port_max": 5980,
+            "vnc_port_min": "{{user `vnc_vrdp_port`}}",
+            "vnc_port_max": "{{user `vnc_vrdp_port`}}",
             "name": "qemu",
             "net_device": "virtio-net",
             "output_directory": "target-qemu",
@@ -61,6 +61,8 @@
             "http_port_min": "{{user `http_port_min`}}",
             "iso_checksum": "{{user `iso_checksum`}}",
             "iso_url": "{{user `iso_url`}}",
+            "vrdp_port_min": "{{user `vnc_vrdp_port`}}",
+            "vrdp_port_max": "{{user `vnc_vrdp_port`}}",
             "name": "vbox",
             "floppy_files": [
               "{{user `autounattend`}}",
@@ -155,6 +157,7 @@
           "ssh_wait_timeout": "210m",
           "vm_name": "win10",
           "vnc_bind_address": "0.0.0.0",
+          "vnc_vrdp_port": "5959",
           "virtio_win_iso": "virtio-win.iso"
 
 	}

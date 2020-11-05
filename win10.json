@@ -157,7 +157,7 @@
           "ssh_wait_timeout": "210m",
           "vm_name": "win10",
           "vnc_bind_address": "0.0.0.0",
-          "vnc_vrdp_port": "5959",
+          "vnc_vrdp_port": "5900",
           "virtio_win_iso": "virtio-win.iso"
 
 	}

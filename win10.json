@@ -146,7 +146,7 @@
 	"variables": {
           "boot_wait": "10s",
           "cpus": "4",
-          "disk_size": "16384",
+          "disk_size": "20480",
           "headless": "false",
           "autounattend": "Autounattend.xml",
           "http_directory": "http",

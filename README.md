@@ -16,7 +16,7 @@ For building this image for QEMU, additional [iso image with Windows drivers for
 
 There is one admin user account:
 
-*  `windows` with password `vagrant`, but password is set to random upon startup by [cloudbase-init](https://cloudbase-init.readthedocs.io/en/latest/intro.html) when no password is provided via metadata
+*  `windows` with password set to random upon startup by [cloudbase-init](https://cloudbase-init.readthedocs.io/en/latest/intro.html) unless password is provided via OpenStack metadata `admin_pass`
 
 ## Image for VirtualBox/Vagrant
 

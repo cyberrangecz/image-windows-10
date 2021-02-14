@@ -46,10 +46,10 @@
                     Notice the addition of the `<Key>` element.
                 -->
 
-                <!-- Product Key from http://technet.microsoft.com/en-us/library/jj612867.aspx -->
+                <!-- Product Key from http://technet.microsoft.com/en-us/library/jj612867.aspx 
                 <ProductKey>NPPR9-FWDCX-D2C8J-H872K-2YT43
                     <WillShowUI>Never</WillShowUI>
-                </ProductKey>
+                </ProductKey>-->
             </UserData>
             <ImageInstall>
                 <OSImage>

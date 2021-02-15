@@ -1,6 +1,7 @@
 {
 	"builders": [
         {
+            "use_default_display": "{{user `headless`}}",
             "boot_wait": "{{user `boot_wait`}}",
             "disk_size": "{{ user `disk_size` }}",
             "format": "raw",
@@ -10,11 +11,8 @@
             "http_port_max": "{{user `http_port_max`}}",
             "http_port_min": "{{user `http_port_min`}}",
             "iso_checksum": "{{user `iso_checksum`}}",
-            "iso_checksum_type": "{{user `iso_checksum_type`}}",
             "iso_url": "{{user `iso_url`}}",
-            "vnc_port_min": 5900,
-            "vnc_port_max": 5980,
-            "name": "win10-qemu",
+            "name": "qemu",
             "net_device": "virtio-net",
             "output_directory": "target-qemu",
             "floppy_files": [
@@ -36,14 +34,7 @@
                     "cpus={{ user `cpus` }},maxcpus=16,cores=4"
                 ],
 
-                [   "-display",
-                    "sdl"
-                ],
-
-                [   "-drive", "file={{ user `virtio_win_iso` }},media=cdrom,index=3"
-                ],
-
-                [   "-drive", "file=target-qemu/{{ .Name }},if=virtio,cache=writeback,discard=ignore,format=raw,index=1"
+                [   "-cdrom", "{{ user `virtio_win_iso` }}"
                 ]
             ],
             "shutdown_command": "{{user `shutdown_command`}}",
@@ -53,12 +44,11 @@
             "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
             "type": "qemu",
             "vm_name": "{{user `vm_name`}}",
-            "vnc_bind_address": "{{user `vnc_bind_address`}}"
+            "vnc_port_min": "{{user `vnc_vrdp_port`}}",
+            "vnc_port_max": "{{user `vnc_vrdp_port`}}",
+            "vnc_bind_address": "{{user `vnc_vrdp_bind_address`}}"
         },
         {
-            "boot_command": [
-
-            ],
             "boot_wait": "{{user `boot_wait`}}",
             "disk_size": "{{ user `disk_size` }}",
             "guest_os_type": "Windows10_64",
@@ -67,9 +57,8 @@
             "http_port_max": "{{user `http_port_max`}}",
             "http_port_min": "{{user `http_port_min`}}",
             "iso_checksum": "{{user `iso_checksum`}}",
-            "iso_checksum_type": "{{user `iso_checksum_type`}}",
             "iso_url": "{{user `iso_url`}}",
-            "name": "win10-vbox",
+            "name": "vbox",
             "floppy_files": [
               "{{user `autounattend`}}",
               "./scripts/fixnetwork.ps1",
@@ -97,7 +86,10 @@
             "ssh_private_key_file": "{{user `private_key_file`}}",
             "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
             "type": "virtualbox-iso",
-            "vm_name": "{{user `vm_name`}}"
+            "vm_name": "{{user `vm_name`}}",
+            "vrdp_port_min": "{{user `vnc_vrdp_port`}}",
+            "vrdp_port_max": "{{user `vnc_vrdp_port`}}",
+            "vrdp_bind_address": "{{user `vnc_vrdp_bind_address`}}"
           }
     ],
 	"provisioners": [
@@ -109,7 +101,7 @@
             "type": "file",
             "source": "./scripts/spice-guest-tools-latest.exe",
             "destination": "C:/Windows/Temp/",
-            "only": ["win10-qemu"]
+            "only": ["qemu"]
           },
           {
             "type": "powershell",
@@ -117,7 +109,7 @@
                         "./scripts/spiceToolsInstall.ps1",
                         "./scripts/Install-CloudBaseInit.ps1"
                        ],
-            "only": ["win10-qemu"]
+            "only": ["qemu"]
           },
           {
             "type": "windows-shell",
@@ -126,12 +118,13 @@
           {
             "type": "windows-shell",
             "script": "./scripts/vm-guest-tools.bat",
-            "only": ["win10-vbox"]
+            "only": ["vbox"]
           },
           {
             "type": "powershell",
             "scripts": [
-                        "./scripts/fix.ps1"
+                        "./scripts/fix.ps1",
+                        "./scripts/sysprep.ps1"
                        ]
           }
     ],
@@ -140,29 +133,29 @@
             "type": "vagrant",
             "output" : "target-vbox/win10.box",
             "vagrantfile_template": "Vagrantfile-template",
-            "except": ["win10-qemu"]
+            "only": ["vbox"]
        }
 	],
 	"variables": {
           "boot_wait": "10s",
           "cpus": "4",
           "disk_size": "20480",
-          "headless": "false",
+          "headless": "true",
           "autounattend": "Autounattend.xml",
           "http_directory": "http",
           "http_port_max": "10089",
           "http_port_min": "10082",
           "iso_url": "https://software-download.microsoft.com/download/pr/18363.418.191007-0143.19h2_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso",
-          "iso_checksum_type": "sha1",
           "iso_checksum": "489ebee676e26cdb81377b0e6385c001a22589b8",
           "memory_size": "4096",
           "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
           "ssh_username": "windows",
           "ssh_port": "22",
           "private_key_file": "ssh-key",
-          "ssh_wait_timeout": "210m",
+          "ssh_wait_timeout": "5h",
           "vm_name": "win10",
-          "vnc_bind_address": "0.0.0.0",
+          "vnc_vrdp_bind_address": "127.0.0.1",
+          "vnc_vrdp_port": "5900",
           "virtio_win_iso": "virtio-win.iso"
 
 	}

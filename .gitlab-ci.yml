@@ -1,0 +1,8 @@
+include:
+  - project: muni-kypo-images/ci-cd-virtual-images
+    file: .gitlab-ci-template-windows.yml
+
+variables:
+  NAME: "win10"
+  TYPE: "windows"
+  DISTRO: "windows"

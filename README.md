@@ -1,8 +1,8 @@
-# Windows-10-amd64
+# Windows-10
 
 ## Introduction
 
-This repo contains Packer files for building Windows 10 base image for QEMU/OpenStack and for VirtualBox/Vagrant.
+This repo contains Packer files for building Windows 10 amd64 base image for QEMU/OpenStack and for VirtualBox/Vagrant.
 
 General requirement and instructions how to create and import created images to OpenStack/Vagrant are available in [wiki](https://gitlab.ics.muni.cz/muni-kypo-images/muni-kypo-images-wiki/-/wikis/image-packer).
 
@@ -20,6 +20,8 @@ There is one admin user account:
 
 ## Image for VirtualBox/Vagrant
 
+**Image for VirtualBox/Vagrant is currently broken**
+
 There is one admin user account:
 
 *  `windows` with password `vagrant`
@@ -28,4 +30,4 @@ If Ansible fails to connect, add `"ansible_winrm_scheme" => "http"` to `ansible.
 
 ## Known issues and requested features
 
-* See [issues](https://gitlab.ics.muni.cz/muni-kypo-images/windows-10-amd64/-/issues).
+* See [issues](https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/issues).

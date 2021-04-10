@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [qemu-0.3.0] - 2021-4-10
+### Changed
+- Disabled basic auth and http listener for winrm
+- More windows updates will be installed
+### Fixed
+- Issue with password being changed on every reboot for `windows` user
+
 ## [qemu-0.2.0] - 2021-2-15
 ### Changed
 - Allowed ICMP ping for IPv4 and IPv6
@@ -14,3 +21,4 @@
 
 [qemu-0.1.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/073b2753a8eef53c15a722edb5dd91475a7ccc38
 [qemu-0.2.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.2.0
+[qemu-0.3.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.3.0

@@ -3,7 +3,7 @@
         {
             "use_default_display": "{{user `headless`}}",
             "boot_wait": "{{user `boot_wait`}}",
-            "disk_size": "{{ user `disk_size` }}",
+            "disk_size": "{{ user `disk_size_qemu` }}",
             "format": "raw",
             "disk_interface": "virtio",
             "headless": "{{user `headless`}}",
@@ -18,9 +18,10 @@
             "floppy_files": [
               "{{user `autounattend`}}",
               "./scripts/fixnetwork.ps1",
-              "./scripts/microsoft-updates.bat",
+              "./scripts/microsoft-updates.ps1",
               "./scripts/win-updates.ps1",
-              "./scripts/openssh.ps1"
+              "./scripts/openssh.ps1",
+              "./scripts/configureRemotingForAnsible.ps1"
             ],
 
             "qemuargs": [
@@ -50,7 +51,7 @@
         },
         {
             "boot_wait": "{{user `boot_wait`}}",
-            "disk_size": "{{ user `disk_size` }}",
+            "disk_size": "{{ user `disk_size_vbox` }}",
             "guest_os_type": "Windows10_64",
             "headless": "{{user `headless`}}",
             "http_directory": "{{user `http_directory`}}",
@@ -62,7 +63,7 @@
             "floppy_files": [
               "{{user `autounattend`}}",
               "./scripts/fixnetwork.ps1",
-              "./scripts/microsoft-updates.bat",
+              "./scripts/microsoft-updates.ps1",
               "./scripts/win-updates.ps1",
               "./scripts/openssh.ps1"
             ],
@@ -123,9 +124,14 @@
           {
             "type": "powershell",
             "scripts": [
-                        "./scripts/fix.ps1",
-                        "./scripts/sysprep.ps1"
+                        "./scripts/fix.ps1"
+                        
                        ]
+          },
+          {
+            "type": "powershell",
+            "script": "./scripts/sysprep.ps1",
+            "only": ["qemu"]
           }
     ],
 	"post-processors": [
@@ -139,14 +145,15 @@
 	"variables": {
           "boot_wait": "10s",
           "cpus": "4",
-          "disk_size": "20480",
+          "disk_size_qemu": "20480",
+          "disk_size_vbox": "51200",
           "headless": "true",
           "autounattend": "Autounattend.xml",
           "http_directory": "http",
           "http_port_max": "10089",
           "http_port_min": "10082",
-          "iso_url": "https://software-download.microsoft.com/download/pr/18363.418.191007-0143.19h2_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso",
-          "iso_checksum": "489ebee676e26cdb81377b0e6385c001a22589b8",
+          "iso_url": "https://software-download.microsoft.com/download/pr/19042.631.201119-0144.20h2_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso",
+          "iso_checksum": "32c7b0a51a48cc4f67c250be4fe2b384febb9cc864c5b77a052d4e2845394eac",
           "memory_size": "4096",
           "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
           "ssh_username": "windows",

@@ -65,7 +65,8 @@
               "./scripts/fixnetwork.ps1",
               "./scripts/microsoft-updates.ps1",
               "./scripts/win-updates.ps1",
-              "./scripts/openssh.ps1"
+              "./scripts/openssh.ps1",
+              "./scripts/configureRemotingForAnsible.ps1"
             ],
             "vboxmanage": [
                 [
@@ -113,6 +114,13 @@
             "only": ["qemu"]
           },
           {
+            "type": "powershell",
+            "scripts": [
+                        "./scripts/fixesVBox.ps1"
+                       ],
+            "only": ["vbox"]
+          },
+          {
             "type": "windows-shell",
             "script": "./scripts/disable-auto-logon.bat"
           },
@@ -127,6 +135,9 @@
                         "./scripts/fix.ps1"
                         
                        ]
+          },
+          {
+            "type": "windows-restart"
           },
           {
             "type": "powershell",

@@ -15,6 +15,8 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "playbook.yml"
     ansible.verbose = true
     ansible.extra_vars = {
+        "ansible_winrm_server_cert_validation" => "ignore",
+        "ansible_winrm_transport" => "basic",
         "ansible_winrm_scheme" => "http"
     }
   end

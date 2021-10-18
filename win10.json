@@ -126,7 +126,8 @@
           {
             "type": "powershell",
             "scripts": [
-                        "./scripts/fix.ps1"
+                        "./scripts/fix.ps1",
+                        "./scripts/enable-rdp.ps1"
                         
                        ]
           },

@@ -1,5 +1,10 @@
 # Changelog
 
+## [qemu-0.4.0], [vbox-0.3.0] - 2021-10-18
+### Changed
+- NTP server to ntp1.muni.cz
+- Enabled RDP [(Issue #3)](https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/issues/3)
+
 ## [vbox-0.2.0] - 2021-07-29
 ### Changed
 - Allowed basic auth and http listener for winrm
@@ -31,5 +36,7 @@
 [qemu-0.1.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/073b2753a8eef53c15a722edb5dd91475a7ccc38
 [qemu-0.2.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.2.0
 [qemu-0.3.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.3.0
+[qemu-0.4.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.0
 [vbox-0.1.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.1.0
 [vbox-0.2.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.2.0
+[vbox-0.3.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.3.0

@@ -6,3 +6,4 @@ variables:
   NAME: "win10"
   TYPE: "windows"
   DISTRO: "windows"
+  GUI_ACCESS: "true"

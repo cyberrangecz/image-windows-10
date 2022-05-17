@@ -22,6 +22,10 @@ There is one admin user account:
 
 If Ansible fails to connect, add `"ansible_winrm_scheme" => "http"` to `ansible.extra_vars` in Vagrantfile.
 
+## How to build
+
+For information how to build this image see [wiki](https://gitlab.ics.muni.cz/muni-kypo-images/muni-kypo-images-wiki/-/wikis/How-to-build-an-image-locally).
+
 ## Known issues and requested features
 
 * See [issues](https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/issues).

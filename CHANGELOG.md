@@ -1,5 +1,9 @@
 # Changelog
 
+## [qemu-0.4.2] - 2022-10-11
+### Changed
+- No changes, new build to install more windows updates
+
 ## [qemu-0.4.1] - 2021-12-01
 ### Changed
 - Set `owner_specified.openstack.gui_access` to true
@@ -42,6 +46,7 @@
 [qemu-0.3.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.3.0
 [qemu-0.4.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.0
 [qemu-0.4.1]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.1
+[qemu-0.4.2]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.2
 [vbox-0.1.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.1.0
 [vbox-0.2.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.2.0
 [vbox-0.3.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.3.0

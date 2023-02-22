@@ -1,5 +1,11 @@
 # Changelog
 
+## [qemu-0.4.3] - 2023-02-22
+### Changed
+- Use newer Windows ISO for newer Windows version
+- Use newer cloudbase-init 1.1.4
+- Resolves [(Issue #5)](https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/issues/5)
+
 ## [qemu-0.4.2] - 2022-10-11
 ### Changed
 - No changes, new build to install more windows updates
@@ -47,6 +53,7 @@
 [qemu-0.4.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.0
 [qemu-0.4.1]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.1
 [qemu-0.4.2]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.2
+[qemu-0.4.3]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.3
 [vbox-0.1.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.1.0
 [vbox-0.2.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.2.0
 [vbox-0.3.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.3.0

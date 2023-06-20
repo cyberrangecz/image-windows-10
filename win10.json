@@ -127,8 +127,8 @@
             "type": "powershell",
             "scripts": [
                         "./scripts/fix.ps1",
-                        "./scripts/enable-rdp.ps1"
-                        
+                        "./scripts/enable-rdp.ps1",
+                        "./scripts/cleanup.ps1"
                        ]
           },
           {

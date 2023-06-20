@@ -1,5 +1,9 @@
 # Changelog
 
+## [qemu-0.5.0] - 2023-06-20
+### Changed
+- Update .NET to 4.8
+
 ## [qemu-0.4.3] - 2023-02-22
 ### Changed
 - Use newer Windows ISO for newer Windows version
@@ -54,6 +58,7 @@
 [qemu-0.4.1]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.1
 [qemu-0.4.2]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.2
 [qemu-0.4.3]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.3
+[qemu-0.5.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.5.0
 [vbox-0.1.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.1.0
 [vbox-0.2.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.2.0
 [vbox-0.3.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.3.0

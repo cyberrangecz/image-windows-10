@@ -1,2 +1,3 @@
 
-Start-Process -FilePath "$PSScriptRoot/spice-guest-tools-latest.exe" -ArgumentList "/S" -Wait -ErrorAction SilentlyContinue
+certutil -AddStore "TrustedPublisher" "a:\redhat.cer"
+Start-Process -FilePath "C:\Windows\Temp\spice-guest-tools.exe" -ArgumentList "/S" -Wait

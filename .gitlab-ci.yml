@@ -1,6 +1,7 @@
 include:
   - project: muni-kypo-images/ci-cd-virtual-images
     file: qemu.yml
+    ref: update
   - project: muni-kypo-images/ci-cd-virtual-images
     file: vbox.yml
 

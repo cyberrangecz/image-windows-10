@@ -2,7 +2,7 @@
 $partition = Get-Partition -DriveLetter 'C'
 
 # Defrag disk
-defrag C: /L /D /K /G /H
+defrag C: /L /D /K /G /H /X
 
 # Resize the system partition with the updated size
 @"

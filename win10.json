@@ -17,7 +17,6 @@
               "redhat.cer",
               "./scripts/fixnetwork.ps1",
               "./scripts/microsoft-updates.ps1",
-              "./scripts/win-updates.ps1",
               "./scripts/openssh.ps1",
               "./scripts/configureRemotingForAnsible.ps1"
             ],
@@ -59,7 +58,6 @@
               "{{user `autounattend`}}",
               "./scripts/fixnetwork.ps1",
               "./scripts/microsoft-updates.ps1",
-              "./scripts/win-updates.ps1",
               "./scripts/openssh.ps1",
               "./scripts/configureRemotingForAnsible.ps1"
             ],
@@ -90,6 +88,9 @@
           }
     ],
 	"provisioners": [
+          {
+            "type": "windows-update"
+          },
           {
             "type": "powershell",
             "script": "./scripts/configureRemotingForAnsible.ps1"

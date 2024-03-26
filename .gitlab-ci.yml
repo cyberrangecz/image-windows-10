@@ -12,6 +12,8 @@ variables:
 
 build-qemu:
   before_script:
+    - !reference [ .build, before_script ]
+    - packer plugins install github.com/rgl/windows-update
     - if [ ! -f virtio-win.iso ]; then
     -  wget -nv https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso -O virtio-win.iso
     - fi

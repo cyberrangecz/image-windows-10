@@ -267,7 +267,7 @@ If (!(Get-Service "WinRM"))
 ElseIf ((Get-Service "WinRM").Status -ne "Running")
 {
     Write-Output "Setting WinRM service to start automatically on boot."
-    Set-Service -Name "WinRM" -StartupType Automatic
+    sc.exe config WinRM start= Auto
     Write-Log "Set WinRM service to start automatically on boot."
     Write-Output "Starting WinRM service."
     Start-Service -Name "WinRM" -ErrorAction Stop

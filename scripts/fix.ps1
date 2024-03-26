@@ -18,3 +18,6 @@ Set-ItemProperty . NtpServer "ntp1.muni.cz"
 Pop-Location
 Stop-Service w32time
 Start-Service w32time
+
+# Disable hibernation
+powercfg /h off

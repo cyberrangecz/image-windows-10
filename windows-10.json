@@ -180,7 +180,7 @@
           "ssh_port": "22",
           "private_key_file": "ssh-key",
           "ssh_wait_timeout": "5h",
-          "vm_name": "win10",
+          "vm_name": "windows-10",
           "vnc_vrdp_bind_address": "127.0.0.1",
           "vnc_vrdp_port": "5900",
           "virtio_win_iso": "virtio-win.iso"

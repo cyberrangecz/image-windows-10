@@ -5,7 +5,7 @@ include:
     file: vbox.yml
 
 variables:
-  NAME: "win10"
+  NAME: "windows-10"
   TYPE: "windows"
   DISTRO: "windows"
   GUI_ACCESS: "true"

@@ -14,9 +14,9 @@
             "output_directory": "target-qemu",
             "floppy_files": [
               "{{user `autounattend`}}",
+              "redhat.cer",
               "./scripts/fixnetwork.ps1",
               "./scripts/microsoft-updates.ps1",
-              "./scripts/win-updates.ps1",
               "./scripts/openssh.ps1",
               "./scripts/configureRemotingForAnsible.ps1"
             ],
@@ -58,7 +58,6 @@
               "{{user `autounattend`}}",
               "./scripts/fixnetwork.ps1",
               "./scripts/microsoft-updates.ps1",
-              "./scripts/win-updates.ps1",
               "./scripts/openssh.ps1",
               "./scripts/configureRemotingForAnsible.ps1"
             ],
@@ -90,12 +89,15 @@
     ],
 	"provisioners": [
           {
+            "type": "windows-update"
+          },
+          {
             "type": "powershell",
             "script": "./scripts/configureRemotingForAnsible.ps1"
           },
           {
             "type": "file",
-            "source": "./scripts/spice-guest-tools-latest.exe",
+            "source": "./scripts/spice-guest-tools.exe",
             "destination": "C:/Windows/Temp/",
             "only": ["qemu"]
           },
@@ -127,12 +129,18 @@
             "type": "powershell",
             "scripts": [
                         "./scripts/fix.ps1",
-                        "./scripts/enable-rdp.ps1",
-                        "./scripts/cleanup.ps1"
+                        "./scripts/enable-rdp.ps1"
                        ]
           },
           {
             "type": "windows-restart"
+          },
+          {
+            "type": "powershell",
+            "scripts": [
+                        "./scripts/cleanup.ps1",
+                        "./scripts/shrink-filesystem.ps1"
+                       ]
           },
           {
             "type": "powershell",
@@ -141,6 +149,15 @@
           }
     ],
 	"post-processors": [
+       {
+        "type": "shell-local",
+        "inline": [
+          "parted -s target-qemu/* print free",
+          "NEW_SIZE=$(parted -sm target-qemu/* unit b print free | grep free | awk -F ':' '{print $2}' | sort -rh | head -n 1)",
+          "qemu-img resize -f raw --shrink target-qemu/* $NEW_SIZE"
+        ],
+        "only": ["qemu"]
+       },
        {
             "type": "vagrant",
             "output" : "target-vbox/win10.box",
@@ -151,7 +168,7 @@
 	"variables": {
           "boot_wait": "10s",
           "cpus": "4",
-          "disk_size_qemu": "20480",
+          "disk_size_qemu": "51200",
           "disk_size_vbox": "51200",
           "headless": "true",
           "autounattend": "Autounattend.xml",

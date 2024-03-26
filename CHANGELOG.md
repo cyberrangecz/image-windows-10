@@ -1,5 +1,11 @@
 # Changelog
 
+## [qemu-0.6.0] - 2024-03-26
+### Changed
+- Windows license is activated by cloudbase-init
+- Hibernation file is disabled
+- Build is run with larger disk, which is then shrunk
+
 ## [qemu-0.5.0] - 2023-06-20
 ### Changed
 - Update .NET to 4.8
@@ -59,6 +65,7 @@
 [qemu-0.4.2]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.2
 [qemu-0.4.3]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.4.3
 [qemu-0.5.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.5.0
+[qemu-0.6.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/qemu-0.6.0
 [vbox-0.1.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.1.0
 [vbox-0.2.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.2.0
 [vbox-0.3.0]: https://gitlab.ics.muni.cz/muni-kypo-images/windows-10/-/tree/vbox-0.3.0

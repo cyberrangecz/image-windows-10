@@ -1,4 +1,4 @@
-name: image-testing-topology
+name: windows-10-testing-topology
 
 hosts:
   - name: image-test
@@ -6,14 +6,14 @@ hosts:
       image: IMAGE_NAME
       mgmt_user: windows
       mng_protocol: winrm
-    flavor: csirtmu.small2x4
+    flavor: standard.medium
 
 routers:
   - name: router
     base_box:
       image: debian-10
       mgmt_user: debian
-    flavor: csirtmu.tiny1x2
+    flavor: standard.small
 
 networks:
   - name: network

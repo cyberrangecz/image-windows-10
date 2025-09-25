@@ -1,0 +1,5 @@
+NAME             = "windows-10"
+TYPE             = "windows"
+DISTRO           = "windows"
+GUI_ACCESS       = "true"
+IMAGE_LOCAL_PATH = "target-qemu/windows-10.qcow2"

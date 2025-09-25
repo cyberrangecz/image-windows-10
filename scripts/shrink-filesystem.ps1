@@ -11,3 +11,5 @@ sel disk $($partition.DiskNumber)
 sel part $($partition.PartitionNumber)
 shrink
 "@ | diskpart
+
+Write-VolumeCache C

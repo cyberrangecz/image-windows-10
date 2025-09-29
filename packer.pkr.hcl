@@ -49,14 +49,6 @@ build {
 
   provisioner "windows-update" {}
 
-  provisioner "powershell" {
-    scripts = ["scripts/configureRemotingForAnsible.ps1"]
-  }
-
-  provisioner "windows-shell" {
-    script = "scripts/disable-auto-logon.bat"
-  }
-
   provisioner "file" {
     destination = "C:/Windows/Temp/"
     source      = "scripts/spice-guest-tools.exe"
@@ -64,13 +56,9 @@ build {
 
   provisioner "powershell" {
     scripts = [
+      "scripts/configureRemotingForAnsible.ps1",
       "scripts/spiceToolsInstall.ps1",
-      "scripts/Install-CloudBaseInit.ps1"
-    ]
-  }
-
-  provisioner "powershell" {
-    scripts = [
+      "scripts/Install-CloudBaseInit.ps1",
       "scripts/fix.ps1",
       "scripts/enable-rdp.ps1"
     ]
@@ -78,15 +66,16 @@ build {
 
   provisioner "windows-restart" {}
 
-  provisioner "powershell" {
-    scripts = [
-      "scripts/cleanup.ps1",
-      "scripts/shrink-filesystem.ps1"
-    ]
+  provisioner "windows-shell" {
+    script = "scripts/disable-auto-logon.bat"
   }
 
   provisioner "powershell" {
-    script = "scripts/sysprep.ps1"
+    scripts = [
+      "scripts/cleanup.ps1",
+      "scripts/shrink-filesystem.ps1",
+      "scripts/sysprep.ps1"
+    ]
   }
 
   post-processor "shell-local" {

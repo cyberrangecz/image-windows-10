@@ -67,7 +67,8 @@ build {
   provisioner "windows-restart" {}
 
   provisioner "windows-shell" {
-    script = "scripts/disable-auto-logon.bat"
+    pause_before = "3m"
+    script       = "scripts/disable-auto-logon.bat"
   }
 
   provisioner "powershell" {

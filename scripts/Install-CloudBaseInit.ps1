@@ -17,6 +17,8 @@ first_logon_behaviour=no
 activate_windows=true
 real_time_clock_utc=true
 ntp_enable_service=true
+ntp_use_dhcp_config=false
+ntp_servers=time.windows.com
 plugins=cloudbaseinit.plugins.common.mtu.MTUPlugin, cloudbaseinit.plugins.windows.ntpclient.NTPClientPlugin, cloudbaseinit.plugins.windows.createuser.CreateUserPlugin, cloudbaseinit.plugins.common.networkconfig.NetworkConfigPlugin, cloudbaseinit.plugins.common.setuserpassword.SetUserPasswordPlugin, cloudbaseinit.plugins.common.localscripts.LocalScriptsPlugin, cloudbaseinit.plugins.windows.winrmcertificateauth.ConfigWinRMCertificateAuthPlugin, cloudbaseinit.plugins.common.sshpublickeys.SetUserSSHPublicKeysPlugin, cloudbaseinit.plugins.windows.extendvolumes.ExtendVolumesPlugin, cloudbaseinit.plugins.common.userdata.UserDataPlugin, cloudbaseinit.plugins.windows.licensing.WindowsLicensingPlugin
 metadata_services=cloudbaseinit.metadata.services.configdrive.ConfigDriveService, cloudbaseinit.metadata.services.httpservice.HttpService
 '
@@ -51,6 +53,39 @@ while ((Get-Date) -lt $startTime.AddSeconds($timeout)) {
 if ((Get-Date) -ge $startTime.AddSeconds($timeout)) {
     Write-Host "Timeout: WinRM is still not available after $timeout seconds."
 }
+'
+
+New-Item -Path "C:\Program Files\Cloudbase Solutions\Cloudbase-Init\LocalScripts" -Name "sync-time.ps1" -ItemType "file" -Value '
+# Allow large time corrections (up to 12 hours)
+w32tm /config /update /maxposphasecorrection:43200 /maxnegphasecorrection:43200
+
+# Stop, unregister, re-register, and start Windows Time service
+net stop w32time
+w32tm /unregister
+w32tm /register
+net start w32time
+
+# Define NTP servers
+$ntpServers = "time.windows.com,0x9 0.pool.ntp.org,0x9 1.pool.ntp.org,0x9"
+
+# Retry NTP sync multiple times with short delay
+for ($i = 1; $i -le 5; $i++) {
+    Write-Host "Configuring NTP servers and forcing resync..."
+    w32tm /config /manualpeerlist:$ntpServers /syncfromflags:manual /update
+    Start-Sleep -Seconds 10
+    try {
+        w32tm /resync /force
+        Write-Host "Resync command sent successfully."
+        break
+    }
+    catch {
+        Write-Host "Resync attempt $i failed. Retrying..."
+    }
+}
+
+# Show final status
+Write-Host "Final NTP status:"
+w32tm /query /status
 '
 
 Write-Host "Cloudbase-Init setup done!"

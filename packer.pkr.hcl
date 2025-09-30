@@ -57,7 +57,7 @@ build {
   provisioner "powershell" {
     scripts = [
       "scripts/configureRemotingForAnsible.ps1",
-      "scripts/spiceToolsInstall.ps1", 
+      "scripts/spiceToolsInstall.ps1",
       "scripts/enable-rdp.ps1"
     ]
   }

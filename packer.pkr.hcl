@@ -58,7 +58,6 @@ build {
     scripts = [
       "scripts/configureRemotingForAnsible.ps1",
       "scripts/spiceToolsInstall.ps1",
-      "scripts/Install-CloudBaseInit.ps1",
       "scripts/fix.ps1",
       "scripts/enable-rdp.ps1"
     ]
@@ -67,12 +66,12 @@ build {
   provisioner "windows-restart" {}
 
   provisioner "windows-shell" {
-    pause_before = "3m"
-    script       = "scripts/disable-auto-logon.bat"
+    script = "scripts/disable-auto-logon.bat"
   }
 
   provisioner "powershell" {
     scripts = [
+      "scripts/Install-CloudBaseInit.ps1",
       "scripts/cleanup.ps1",
       "scripts/shrink-filesystem.ps1",
       "scripts/sysprep.ps1"

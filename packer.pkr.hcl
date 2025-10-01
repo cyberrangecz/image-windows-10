@@ -57,7 +57,7 @@ build {
   provisioner "powershell" {
     scripts = [
       "scripts/configureRemotingForAnsible.ps1",
-      "scripts/spiceToolsInstall.ps1", 
+      "scripts/spiceToolsInstall.ps1",
       "scripts/enable-rdp.ps1"
     ]
   }
@@ -71,6 +71,7 @@ build {
   provisioner "powershell" {
     scripts = [
       "scripts/fix.ps1",
+      "scripts/sync-time.ps1",
       "scripts/Install-CloudBaseInit.ps1",
       "scripts/cleanup.ps1",
       "scripts/shrink-filesystem.ps1",

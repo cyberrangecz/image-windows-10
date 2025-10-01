@@ -55,4 +55,45 @@ if ((Get-Date) -ge $startTime.AddSeconds($timeout)) {
 }
 '
 
+$localScriptsPath = "C:\Program Files\Cloudbase Solutions\Cloudbase-Init\LocalScripts"
+
+# ==============================
+# sync-time.ps1 content
+# ==============================
+$scriptContent = @'
+# Allow large time corrections (up to 12 hours)
+w32tm /config /update /maxposphasecorrection:43200 /maxnegphasecorrection:43200
+
+# Stop, unregister, re-register, and start Windows Time service
+net stop w32time
+w32tm /unregister
+w32tm /register
+net start w32time
+
+# Define NTP servers
+$ntpServers = "time.windows.com,0x9 0.pool.ntp.org,0x9 1.pool.ntp.org,0x9"
+
+# Retry NTP sync multiple times with short delay
+for ($i = 1; $i -le 5; $i++) {
+    Write-Host "Attempt $i: Configuring NTP servers and forcing resync..."
+    w32tm /config /manualpeerlist:$ntpServers /syncfromflags:manual /update
+    Start-Sleep -Seconds 10
+    try {
+        w32tm /resync /force
+        Write-Host "Resync command sent successfully."
+        break
+    }
+    catch {
+        Write-Host "Resync attempt $i failed. Retrying..."
+    }
+}
+
+# Show final status
+Write-Host "Final NTP status:"
+w32tm /query /status
+'@
+
+# Create the script file safely
+New-Item -LiteralPath "$localScriptsPath\sync-time.ps1" -ItemType File -Value $scriptContent -Force
+
 Write-Host "Cloudbase-Init setup done!"

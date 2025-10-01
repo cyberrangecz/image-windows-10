@@ -68,10 +68,14 @@ build {
     script = "scripts/disable-auto-logon.bat"
   }
 
+  provisioner "file" {
+    destination = "C:/Program Files/Cloudbase Solutions/Cloudbase-Init/LocalScripts/sync-time.ps1"
+    source = "scripts/sync-time.ps1"
+  }
+
   provisioner "powershell" {
     scripts = [
       "scripts/fix.ps1",
-      "scripts/sync-time.ps1",
       "scripts/Install-CloudBaseInit.ps1",
       "scripts/cleanup.ps1",
       "scripts/shrink-filesystem.ps1",
